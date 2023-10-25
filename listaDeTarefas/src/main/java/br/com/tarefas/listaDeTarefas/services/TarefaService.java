@@ -60,8 +60,8 @@ public class TarefaService {
                 .collect(Collectors.toList());
     }
 
-    public TarefaDTO editar(TarefaDTO tarefaDTO) {
-        Optional<Tarefa> optionalTarefa = this.tarefaRepository.findByAtividadeIgnoreCaseContaining(tarefaDTO.getAtividade());
+    public TarefaDTO editar(String atividade, TarefaDTO tarefaDTO) {
+        Optional<Tarefa> optionalTarefa = this.tarefaRepository.findByAtividadeIgnoreCaseContaining(atividade);
 
         if (optionalTarefa.isPresent()) {
             Tarefa tarefaDB = optionalTarefa.get();

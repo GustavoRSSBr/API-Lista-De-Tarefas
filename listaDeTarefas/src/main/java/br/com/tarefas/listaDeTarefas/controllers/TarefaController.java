@@ -42,9 +42,9 @@ public class TarefaController {
         }
     }
 
-    @PutMapping(value = "/editar")
-    public TarefaDTO editar(@RequestBody TarefaDTO tarefaDTO) {
-        return this.tarefaService.editar(tarefaDTO);
+    @PutMapping("/editar/{atividade}")
+    public TarefaDTO editar(@PathVariable("atividade") String atividade, @RequestBody TarefaDTO tarefaDTO) {
+        return this.tarefaService.editar(atividade, tarefaDTO);
     }
 
     @DeleteMapping(value = "/excluir/{atividade}")
