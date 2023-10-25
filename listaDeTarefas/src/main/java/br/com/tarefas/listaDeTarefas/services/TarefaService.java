@@ -7,6 +7,8 @@ import br.com.tarefas.listaDeTarefas.dto.TarefaDTO;
 import br.com.tarefas.listaDeTarefas.model.Tarefa;
 import br.com.tarefas.listaDeTarefas.repository.TarefaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -47,11 +49,11 @@ public class TarefaService {
         return this.tarefaConverter.toTarefaDTO(tarefaDB);
     }
 
-    public List<TarefaDTO> todos() {
-        return this.tarefaRepository.findAll().stream()
-                .map(tarefa -> this.tarefaConverter.toTarefaDTO(tarefa))
-                .collect(Collectors.toList());
+    public Page<TarefaDTO> todos(Pageable pageable) {
+        Page<Tarefa> tarefas = tarefaRepository.findAll(pageable);
+        return tarefas.map(tarefa -> this.tarefaConverter.toTarefaDTO(tarefa));
     }
+
 
     public List<TarefaDTO> buscarAtividade(String atividade) {
         List<Tarefa> tarefas = this.tarefaRepository.findAllByAtividadeIgnoreCaseContaining(atividade);
