@@ -43,23 +43,23 @@ public class TarefaController {
     }
 
 
-    @GetMapping("/buscar/{atividade}")
-    public List<TarefaDTO> buscarAtividade(@PathVariable("atividade") String atividade) {
+    @GetMapping("/buscar/{numeroTarefa}")
+    public TarefaDTO buscarAtividade(@PathVariable("numeroTarefa") String numeroTarefa) {
         try {
-            return this.tarefaService.buscarAtividade(atividade);
+            return this.tarefaService.buscarTarefa(numeroTarefa);
         } catch (RuntimeException e) {
             return null;
         }
     }
 
-    @PutMapping("/editar/{atividade}")
-    public TarefaDTO editar(@PathVariable("atividade") String atividade, @RequestBody TarefaDTO tarefaDTO) {
-        return this.tarefaService.editar(atividade, tarefaDTO);
+    @PutMapping("/editar/{numeroTarefa}")
+    public TarefaDTO editar(@PathVariable("numeroTarefa") String numeroTarefa, @RequestBody TarefaDTO tarefaDTO) {
+        return this.tarefaService.editar(numeroTarefa, tarefaDTO);
     }
 
-    @DeleteMapping(value = "/excluir/{atividade}")
-    public void excluir(@PathVariable("atividade") String atividade) {
-        this.tarefaService.excluir(atividade);
+    @DeleteMapping(value = "/excluir/{numeroTarefa}")
+    public void excluir(@PathVariable("numeroTarefa") String numeroTarefa) {
+        this.tarefaService.excluir(numeroTarefa);
     }
 
 }

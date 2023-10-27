@@ -13,6 +13,7 @@ public class TarefaConverter {
     public TarefaDTO toTarefaDTO(Tarefa tarefa) {
         return TarefaDTO.builder()
                 .atividade(tarefa.getAtividade())
+                .numeroTarefa(tarefa.getNumeroTarefa())
                 .dataCriacao(tarefa.getDataCriacao())
                 .dataEntrega(tarefa.getDataEntrega())
                 .dono(tarefa.getDono())
@@ -22,6 +23,7 @@ public class TarefaConverter {
     public Tarefa toTarefa(TarefaDTO tarefaDTO) {
         return Tarefa.builder()
                 .atividade(tarefaDTO.getAtividade())
+                .numeroTarefa(tarefaDTO.getNumeroTarefa())
                 .dataCriacao(tarefaDTO.getDataCriacao())
                 .dataEntrega(tarefaDTO.getDataEntrega())
                 .dono(tarefaDTO.getDono())
