@@ -13,7 +13,7 @@ public class TarefaConverter {
     public TarefaDTO toTarefaDTO(Tarefa tarefa) {
         return TarefaDTO.builder()
                 .atividade(tarefa.getAtividade())
-                .dataCriacao(LocalDateTime.now())
+                .dataCriacao(tarefa.getDataCriacao())
                 .dataEntrega(tarefa.getDataEntrega())
                 .dono(tarefa.getDono())
                 .build();
@@ -22,7 +22,7 @@ public class TarefaConverter {
     public Tarefa toTarefa(TarefaDTO tarefaDTO) {
         return Tarefa.builder()
                 .atividade(tarefaDTO.getAtividade())
-                .dataCriacao(LocalDateTime.now())
+                .dataCriacao(tarefaDTO.getDataCriacao())
                 .dataEntrega(tarefaDTO.getDataEntrega())
                 .dono(tarefaDTO.getDono())
                 .build();
@@ -31,7 +31,6 @@ public class TarefaConverter {
     public Tarefa toTarefa(BoredDTO BoredDTO) {
         return Tarefa.builder()
                 .atividade(BoredDTO.getActivity())
-                .dataCriacao(LocalDateTime.now())
                 .build();
     }
 }

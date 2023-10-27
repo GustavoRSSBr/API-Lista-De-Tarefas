@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,6 +37,9 @@ public class TarefaService {
     //INSERT - CREATE
     public TarefaDTO criar(TarefaDTO tarefaDTO) {
         Tarefa tarefa = this.tarefaConverter.toTarefa(tarefaDTO);
+        tarefa.setDataCriacao(LocalDateTime.now());
+        UUID uuid = UUID.randomUUID();
+        tarefa.setNumeroTarefa(uuid.toString());
         Tarefa tarefaDB = this.tarefaRepository.save(tarefa);
         return this.tarefaConverter.toTarefaDTO(tarefaDB);
     }
@@ -45,6 +49,9 @@ public class TarefaService {
 
         BoredDTO bored = this.gerarTarefa();
         Tarefa tarefa = this.tarefaConverter.toTarefa(bored);
+        UUID uuid = UUID.randomUUID();
+        tarefa.setNumeroTarefa(uuid.toString());
+        tarefa.setDataCriacao(LocalDateTime.now());
         Tarefa tarefaDB = this.tarefaRepository.save(tarefa);
         return this.tarefaConverter.toTarefaDTO(tarefaDB);
     }
@@ -55,23 +62,24 @@ public class TarefaService {
     }
 
 
-    public List<TarefaDTO> buscarAtividade(String atividade) {
-        List<Tarefa> tarefas = this.tarefaRepository.findAllByAtividadeIgnoreCaseContaining(atividade);
-        return tarefas.stream()
-                .map(this.tarefaConverter::toTarefaDTO)
-                .collect(Collectors.toList());
+    public TarefaDTO buscarTarefa(String numeroTarefa) { 
+        Optional<Tarefa> tarefa = this.tarefaRepository.findTarefaByNumeroTarefa(numeroTarefa);
+        if(tarefa.isPresent()){
+            return this.tarefaConverter.toTarefaDTO(tarefa.get());
+        } else throw new RuntimeException("Tarefa não encontrada");
+
     }
 
-    public TarefaDTO editar(String atividade, TarefaDTO tarefaDTO) {
-        Optional<Tarefa> optionalTarefa = this.tarefaRepository.findByAtividadeIgnoreCaseContaining(atividade);
+    public TarefaDTO editar(String numeroAtividade, TarefaDTO tarefaDTO) {
+        Optional<Tarefa> optionalTarefa = this.tarefaRepository.findTarefaByNumeroTarefa(numeroAtividade);
 
         if (optionalTarefa.isPresent()) {
             Tarefa tarefaDB = optionalTarefa.get();
 
             Tarefa tarefaNova = Tarefa.builder()
                     .id(tarefaDB.getId())
+                    .numeroTarefa(tarefaDB.getNumeroTarefa())
                     .atividade(tarefaDTO.getAtividade())
-                    .dataCriacao(LocalDateTime.now())
                     .dataEntrega(tarefaDTO.getDataEntrega())
                     .dono(tarefaDTO.getDono())
                     .build();
@@ -82,8 +90,8 @@ public class TarefaService {
         throw new RuntimeException("Tarefa não encontrada.");
     }
 
-    public void excluir(String atividade) {
-        Optional<Tarefa> optionalTarefa = this.tarefaRepository.findByAtividadeIgnoreCaseContaining(atividade);
+    public void excluir(String numeroTarefa) {
+        Optional<Tarefa> optionalTarefa = this.tarefaRepository.findTarefaByNumeroTarefa(numeroTarefa);
         optionalTarefa.ifPresent(tarefa -> this.tarefaRepository.delete(tarefa));
     }
 }

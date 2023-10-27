@@ -17,6 +17,8 @@ public class TarefaDTO {
 
     private String atividade;
 
+    private String numeroTarefa;
+
     private LocalDateTime dataCriacao;
 
     private LocalDateTime dataEntrega;

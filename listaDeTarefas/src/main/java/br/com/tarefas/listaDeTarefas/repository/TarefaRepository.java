@@ -9,8 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface TarefaRepository extends JpaRepository <Tarefa, Long> {
-
-    public List<Tarefa> findAllByAtividadeIgnoreCaseContaining(String atividade);
-    public Optional<Tarefa> findByAtividadeIgnoreCaseContaining(String atividade);
-
+    public Optional<Tarefa> findTarefaByNumeroTarefa(String numeroTarefa);
 }
