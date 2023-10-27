@@ -80,6 +80,7 @@ public class TarefaService {
                     .id(tarefaDB.getId())
                     .numeroTarefa(tarefaDB.getNumeroTarefa())
                     .atividade(tarefaDTO.getAtividade())
+                    .dataCriacao(LocalDateTime.now())
                     .dataEntrega(tarefaDTO.getDataEntrega())
                     .dono(tarefaDTO.getDono())
                     .build();
