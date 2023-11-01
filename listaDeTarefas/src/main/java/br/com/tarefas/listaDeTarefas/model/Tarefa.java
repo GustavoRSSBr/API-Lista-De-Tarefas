@@ -24,14 +24,14 @@ public class Tarefa {
     @Column(nullable = false)
     private String atividade;
 
-    @Column(nullable = true)
+    @Column
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime dataCriacao;
 
-    @Column(nullable = true)
+    @Column
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime dataEntrega;
 
-    @Column(nullable = true)
+    @Column
     private String dono;
 }

@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public interface TarefaAPI {
 
     @GetMapping("/api/activity")
-    public BoredDTO gerarTarefa();
+    BoredDTO gerarTarefa();
 
 }
