@@ -1,9 +1,6 @@
 package br.com.tarefas.listaDeTarefas.controllers;
 
-import br.com.tarefas.listaDeTarefas.converter.TarefaConverter;
-import br.com.tarefas.listaDeTarefas.dto.BoredDTO;
 import br.com.tarefas.listaDeTarefas.dto.TarefaDTO;
-import br.com.tarefas.listaDeTarefas.repository.TarefaRepository;
 import br.com.tarefas.listaDeTarefas.services.TarefaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,9 +8,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/tarefa")
